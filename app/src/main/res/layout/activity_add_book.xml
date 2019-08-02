@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.AddBook">
+
+    <ImageView
+        android:id="@+id/bookBackground"
+        android:layout_width="414dp"
+        android:layout_height="286dp"
+        android:layout_marginBottom="8dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/background" />
+
+    <View
+        android:id="@+id/bookView"
+        android:layout_width="412dp"
+        android:layout_height="445dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bookBackground"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="286dp" />
+
+    <ImageView
+        android:id="@+id/bookImage"
+        android:layout_width="191dp"
+        android:layout_height="185dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/bookView"
+        app:layout_constraintEnd_toEndOf="@+id/bookBackground"
+        app:layout_constraintStart_toStartOf="@+id/bookBackground"
+        app:layout_constraintTop_toTopOf="@+id/bookBackground"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/bookName"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="308dp"
+        android:background="@drawable/background"
+        android:text="Book Name"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/booknameTxt"
+        app:layout_constraintTop_toTopOf="@+id/bookView" />
+
+    <TextView
+        android:id="@+id/Author"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/background"
+        android:text="Author"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/bookName"
+        app:layout_constraintTop_toBottomOf="@+id/bookName" />
+
+    <TextView
+        android:id="@+id/Edition"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/background"
+        android:text="Book Edition"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/Author"
+        app:layout_constraintTop_toBottomOf="@+id/Author" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/background"
+        android:text="Price"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/editionTxt"
+        app:layout_constraintTop_toBottomOf="@+id/Edition"
+        app:layout_constraintVertical_bias="0.124" />
+
+    <EditText
+        android:id="@+id/booknameTxt"
+        android:layout_width="304dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="108dp"
+        android:ems="10"
+        android:hint="Enter Book Name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/bookName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bookName"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/authorTxt"
+        android:layout_width="297dp"
+        android:layout_height="54dp"
+        android:ems="10"
+        android:hint="Enter Author Name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/Author"
+        app:layout_constraintStart_toStartOf="@+id/booknameTxt"
+        app:layout_constraintTop_toTopOf="@+id/Author"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/editionTxt"
+        android:layout_width="294dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:hint="Ex: 4th"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/Edition"
+        app:layout_constraintStart_toEndOf="@+id/Edition"
+        app:layout_constraintTop_toTopOf="@+id/Edition"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/priceTxt"
+        android:layout_width="292dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="$"
+        app:layout_constraintBottom_toBottomOf="@+id/price"
+        app:layout_constraintStart_toEndOf="@+id/price"
+        app:layout_constraintTop_toTopOf="@+id/price"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/next"
+        android:layout_width="108dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="btnNext"
+        android:text="@string/next"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/bookView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postalcodetxt" />
+
+    <TextView
+        android:id="@+id/addBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="45dp"
+        android:text="@string/addAnotherBook"
+        android:textColor="#2167F3"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceTxt" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="102dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/addBook"
+        app:layout_constraintBottom_toBottomOf="@+id/next"
+        app:layout_constraintEnd_toStartOf="@+id/next"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/next"
+        app:layout_constraintVertical_bias="0.0"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:onClick="addBookBtn"/>
+
+    <ImageView
+        android:id="@+id/bookImageEdit"
+        android:layout_width="45dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/bookView"
+        app:layout_constraintEnd_toEndOf="@+id/bookBackground"
+        app:layout_constraintHorizontal_bias="0.969"
+        app:layout_constraintStart_toStartOf="@+id/bookBackground"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.973"
+        app:srcCompat="@android:drawable/ic_menu_edit"
+        android:onClick="bookImageEdit"/>
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">BookWorm</string>
+    <string name="loginBtn">Login</string>
+    <string name="loginTxt">Login</string>
+    <string name="signupBtn">SignUp</string>
+    <string name="signupTxt">SignUp</string>
+    <string name="password">Password</string>
+    <string name="email_id">Email Id</string>
+    <string name="Heading">BookWorm</string>
+    <string name="newAccount">Dont have an account?</string>
+    <string name="alreadyHaveaAccount">Already have an account?</string>
+    <string name="textview">TextView</string>
+    <string name="forgotpswd">Forgot Password?</string>
+    <string name="resetpswdText">Enter your email id below to reset your password.</string>
+    <string name="submit">Submit</string>
+    <string name="address">Address</string>
+    <string name="City">City</string>
+    <string name="Province">Province</string>
+    <string name="postalCode">Postal Code</string>
+    <string name="next">Next</string>
+    <string name="addAnotherBook">Add another book</string>
+    <string name="addBook">Add Book</string>
+    <string name="title_activity_home">Home</string>
+</resources>
