@@ -1,16 +1,23 @@
 package com.example.bookworm.Activity;
 
+import android.Manifest;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.bookworm.Models.UserDetails;
 import com.example.bookworm.R;
@@ -36,6 +43,7 @@ public class CreateProfile extends AppCompatActivity {
     EditText address, city, province, postalCode;
     Button btnNext;
     String currentPhotoPath;
+    public Uri imageUri;
 
    private FirebaseDatabase fireDB;
    private DatabaseReference db;
@@ -57,7 +65,7 @@ public class CreateProfile extends AppCompatActivity {
         profileImageStorage = FirebaseStorage.getInstance().getReference("ProfileImages");
         db = FirebaseDatabase.getInstance().getReference("UserDetails");
 
-//
+
 //        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
 //                != PackageManager.PERMISSION_DENIED) {
 //            editBtn.setEnabled(false);
@@ -86,7 +94,7 @@ public class CreateProfile extends AppCompatActivity {
         String province1 = province.getText().toString().trim();
         String postal = postalCode.getText().toString().trim();
 
-       String id = db.push().getKey();
+        String id = db.push().getKey();
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         {
@@ -97,62 +105,45 @@ public class CreateProfile extends AppCompatActivity {
 
             }
         }
+
+        //imageUpload();
+    }
+
+//    public String getExtension(Uri uri){
+//        ContentResolver cr = getContentResolver();
+//        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+//        return  mimeTypeMap.getExtensionFromMimeType(cr.getType(uri));
+//    }
+
+    public void imageUpload(Uri uri){
+
+        imageUri = uri;
+        StorageReference proImage = profileImageStorage.child("ProfileImage");
+        proImage.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        //Uri downloadUrl = taskSnapshot.getUploadSessionUri();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
     }
 
     public void profilebtn(View view) {
 
-
-
     }
 
     public void editbtn(View view) {
-//        try {
-//            dispatchTakePictureIntent();
-//        } catch (IOException exception) {
-//
-//        }
-//        Intent e = new Intent (CreateProfile.this, MainActivity.class);
-//        startActivity(e);
 
         Intent image = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(image,REQUEST_TAKE_PHOTO);
     }
-
-//    public void browseLibraryButtonClick(View view) {
-//    }
-//
-//    private void dispatchTakePictureIntent() throws IOException {
-//        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//
-//        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-//            File photoFile = createImageFile();
-//
-//            if (photoFile != null) {
-//                Uri photoURI = FileProvider.getUriForFile(this,
-//                        BuildConfig.APPLICATION_ID + ".provider", photoFile);
-//
-//                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-//                startActivityForResult(takePictureIntent,REQUEST_TAKE_PHOTO);
-//            }
-//        }
-//    }
-//
-//    private File createImageFile() throws IOException {
-//        String timestamp = new SimpleDateFormat("yyyyMMdd HHmmss").format(new Date());
-//
-//        File storageDir = new File(Environment.
-//                getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "Camera");
-//
-//        if (!storageDir.exists()) {
-//            storageDir.mkdirs();
-//        }
-//
-//        File image = File.createTempFile(timestamp, ".jpg", storageDir);
-//
-//        currentPhotoPath = "file:" + image.getAbsolutePath();
-//
-//        return image;
-//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -166,22 +157,10 @@ public class CreateProfile extends AppCompatActivity {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
                 profileImage.setImageBitmap(bitmap);
 
-                Uri file = Uri.fromFile(new File(imageUri.getPath()));
-                StorageReference proImage = profileImageStorage.child("ProfileImage");
+                //Uri file = Uri.fromFile(new File(imageUri.getPath()));
+                imageUpload(imageUri);
 
-                proImage.putFile(file)
-                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                Uri downloadUrl = taskSnapshot.getUploadSessionUri();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
 
-                            }
-                        });
             } catch (IOException e) {
                // Log.i("TAG", "Some exception " + e);
             }

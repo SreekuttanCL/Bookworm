@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Profile Settings"
+        android:id="@+id/profileSetting"
+        android:onClick="profileSettingBtn"/>
+    <item android:title="Sign Out"
+        android:id="@+id/signOut"
+        android:onClick="signOuut"/>
+</menu>

@@ -1,10 +1,18 @@
 package com.example.bookworm.Activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 
 import com.example.bookworm.Adapters.BookListAdapter;
 import com.example.bookworm.Models.BookDetails;
@@ -72,5 +80,59 @@ public class Home extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void menuBtn(View v) {
+
+        PopupMenu popup = new PopupMenu(this, v);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.main_menu, popup.getMenu());
+        popup.show();
+    }
+
+
+    public void signOuut(MenuItem item) {
+
+        showAlertDialogButtonClicked();
+
+
+
+    }
+
+    public void profileSettingBtn(MenuItem item) {
+        return ;
+    }
+
+    public void showAlertDialogButtonClicked() {
+        // setup the alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Alert");
+        builder.setMessage("Are you sure you want to Sign Out?");
+        // add the buttons
+
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // do something like...
+                dbAuth.signOut();
+                finish();
+
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+                //startActivity(new Intent(getApplicationContext(), Home.class));
+            }
+        });
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+
     }
 }

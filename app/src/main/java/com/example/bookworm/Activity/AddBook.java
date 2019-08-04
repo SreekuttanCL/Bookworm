@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,10 +13,15 @@ import android.widget.ImageView;
 
 import com.example.bookworm.Models.BookDetails;
 import com.example.bookworm.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 
@@ -26,7 +32,9 @@ public class AddBook extends AppCompatActivity {
     EditText bookName, author, edition, price;
     ImageView bookImage,bookImageEdit;
 
-    DatabaseReference db;
+    private DatabaseReference db;
+    private StorageReference bookStorage;
+    private Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +49,7 @@ public class AddBook extends AppCompatActivity {
         bookImageEdit = findViewById(R.id.bookImageEdit);
 
         db = FirebaseDatabase.getInstance().getReference("BookDetails");
+        bookStorage = FirebaseStorage.getInstance().getReference("BookImages");
 
     }
 
@@ -57,23 +66,44 @@ public class AddBook extends AppCompatActivity {
 
     private void addBook(){
 
+        ImageView bImage = bookImage;
         String name = bookName.getText().toString().trim();
         String authorName = author.getText().toString().trim();
         String editionNo = edition.getText().toString().trim();
         String priceNo = price.getText().toString().trim();
 
-       String id = db.push().getKey();
+        String id = db.push().getKey();
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         {
             if (user != null) {
 
-                BookDetails BD = new BookDetails(name,authorName,editionNo,priceNo);
+                BookDetails BD = new BookDetails(bImage,name,authorName,editionNo,priceNo);
                // db.child(id).push().child("BookDetails").setValue(BD);
                 db.child(id).setValue(BD);
 
             }
         }
+    }
+
+    public void imageUpload(Uri uri){
+
+        imageUri = uri;
+        StorageReference bookImage = bookStorage.child("BookImage");
+        bookImage.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        //Uri downloadUrl = taskSnapshot.getUploadSessionUri();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
     }
 
     public void bookImageEdit(View view) {
@@ -93,6 +123,8 @@ public class AddBook extends AppCompatActivity {
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
                 bookImage.setImageBitmap(bitmap);
+
+                imageUpload(imageUri);
             } catch (IOException e) {
                 // Log.i("TAG", "Some exception " + e);
             }

@@ -49,7 +49,7 @@ public class BookListAdapter extends ArrayAdapter<BookDetails> {
             TextView textViewPrice = v.findViewById(R.id.pricelist);
 
 
-            bookImage.setImageResource(R.drawable.background);
+            bookImage.setImageResource(R.drawable.bookwormicon);
             textViewBookName.setText(book.getBookName());
             textViewAuthor.setText(book.getAuthorName());
             textViewEdition.setText(book.getEdition());
