@@ -100,7 +100,8 @@ public class Home extends AppCompatActivity {
     }
 
     public void profileSettingBtn(MenuItem item) {
-        return ;
+        Intent profile = new Intent(Home.this, Profile.class);
+        startActivity(profile);
     }
 
     public void showAlertDialogButtonClicked() {

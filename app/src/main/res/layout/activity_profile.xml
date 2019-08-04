@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Profile">
+
+    <ImageView
+        android:id="@+id/profileBackground"
+        android:layout_width="414dp"
+        android:layout_height="286dp"
+        android:layout_marginBottom="8dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/background" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="152dp"
+        android:layout_height="38dp"
+        android:text="UserName"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileBackground"
+        app:layout_constraintVertical_bias="0.082" />
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="205dp"
+        android:layout_height="33dp"
+        android:text="EmailId"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
+
+    <TextView
+        android:id="@+id/addressprofile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/address"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email" />
+
+    <TextView
+        android:id="@+id/cityprofile"
+        android:layout_width="114dp"
+        android:layout_height="28dp"
+        android:text="@string/City"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addressprofile" />
+
+    <TextView
+        android:id="@+id/provinceProfile"
+        android:layout_width="122dp"
+        android:layout_height="32dp"
+        android:text="@string/Province"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cityprofile" />
+
+    <TextView
+        android:id="@+id/postalCodeProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PostalCode"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/provinceProfile" />
+
+    <ImageView
+        android:id="@+id/profileEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="profileeditbtn"
+        app:layout_constraintBottom_toTopOf="@+id/profileBackground"
+        app:layout_constraintEnd_toStartOf="@+id/profileBackground"
+        app:layout_constraintHorizontal_bias="0.112"
+        app:layout_constraintStart_toEndOf="@+id/profileBackground"
+        app:layout_constraintTop_toBottomOf="@+id/profileBackground"
+        app:layout_constraintVertical_bias="0.157"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
+
+</android.support.constraint.ConstraintLayout>
