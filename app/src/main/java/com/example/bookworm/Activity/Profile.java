@@ -66,13 +66,13 @@ public class Profile extends AppCompatActivity {
                 }
             });
 
-            String name = currentUser.getDisplayName();
+           // String name = currentUser.getDisplayName();
             String email1 = currentUser.getEmail();
             String id = currentUser.getUid();
             //String address1 = String.valueOf(currentUser.getProviderId().);
 
             email.setText(email1);
-            address.setText(address1);
+            //address.setText(address1);
         }
     }
 

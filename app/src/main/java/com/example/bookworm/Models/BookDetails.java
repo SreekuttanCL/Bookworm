@@ -4,7 +4,7 @@ import android.widget.ImageView;
 
 public class BookDetails {
 
-    private ImageView bookImage;
+   // private ImageView bookImage;
     private String bookName;
     private String authorName;
     private String edition;
@@ -14,8 +14,8 @@ public class BookDetails {
 
     }
 
-    public BookDetails(ImageView bookImage, String bookName, String authorName, String edition, String price){
-        this.bookImage = bookImage;
+    public BookDetails( String bookName, String authorName, String edition, String price){
+       // this.bookImage = bookImage;
         this.bookName = bookName;
         this.authorName = authorName;
         this.edition = edition;
@@ -23,9 +23,9 @@ public class BookDetails {
 
     }
 
-    public ImageView getBookImage() {
-        return bookImage;
-    }
+//    public ImageView getBookImage() {
+//        return bookImage;
+//    }
 
     public String getBookName() {
         return bookName;

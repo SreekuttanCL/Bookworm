@@ -44,7 +44,7 @@ public class Home extends AppCompatActivity {
 
         bookList = findViewById(R.id.bookList);
         dbAuth = FirebaseAuth.getInstance();
-       FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseDatabase.getInstance().getReference("BookDetails");
 
         books = new ArrayList<>();
@@ -70,9 +70,9 @@ public class Home extends AppCompatActivity {
 //
 //                }
 
-                BookListAdapter myArtistAdapter =
+                BookListAdapter myBookAdapter =
                         new BookListAdapter(Home.this,books);
-                bookList.setAdapter(myArtistAdapter);
+                bookList.setAdapter(myBookAdapter);
             }
 
             @Override

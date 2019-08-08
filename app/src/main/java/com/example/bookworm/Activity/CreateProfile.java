@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -54,7 +55,7 @@ public class CreateProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_profile);
 
-        profileImage = findViewById(R.id.profileImage);
+        profileImage = findViewById(R.id.imageView5);
         address = findViewById(R.id.addresstxt);
         city = findViewById(R.id.citytxt);
         province = findViewById(R.id.provincetxt);
@@ -65,26 +66,27 @@ public class CreateProfile extends AppCompatActivity {
         profileImageStorage = FirebaseStorage.getInstance().getReference("ProfileImages");
         db = FirebaseDatabase.getInstance().getReference("UserDetails");
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] {
 
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-//                != PackageManager.PERMISSION_DENIED) {
-//            editBtn.setEnabled(false);
-//
-//            ActivityCompat.requestPermissions(this, new String[] {
-//
-//                    Manifest.permission.CAMERA,
-//                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-//
-//            }, 0);
-//        }
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+
+            }, 0);
+        }
+        else{
+
+            editBtn.setEnabled(false);
+        }
+
     }
 
     public void btnNext(View view) {
 
         addUserDetails();
 
-        Intent next = new Intent(CreateProfile.this, AddBook.class);
-        startActivity(next);
+
     }
 
     private void addUserDetails(){
@@ -94,15 +96,36 @@ public class CreateProfile extends AppCompatActivity {
         String province1 = province.getText().toString().trim();
         String postal = postalCode.getText().toString().trim();
 
-        String id = db.push().getKey();
+        if (TextUtils.isEmpty(address1)){
+            Toast.makeText(this,"Please enter a valid Address", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if (TextUtils.isEmpty(city1)){
+            Toast.makeText(this,"Please enter valid city", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if (TextUtils.isEmpty(province1)){
+            Toast.makeText(this,"Please enter valid Province", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if (TextUtils.isEmpty(postal)){
+            Toast.makeText(this,"Please enter valid Postal Code", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else {
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        {
-            if (user != null) {
+            String id = db.push().getKey();
 
-                UserDetails UD = new UserDetails(address1,city1,province1,postal);
-                db.child(id).setValue(UD);
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            {
+                if (user != null) {
 
+                    UserDetails UD = new UserDetails(address1, city1, province1, postal);
+                    db.child(id).setValue(UD);
+                    Intent next = new Intent(CreateProfile.this, AddBook.class);
+                    startActivity(next);
+
+                }
             }
         }
 
@@ -140,6 +163,8 @@ public class CreateProfile extends AppCompatActivity {
     }
 
     public void editbtn(View view) {
+
+
 
         Intent image = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(image,REQUEST_TAKE_PHOTO);
